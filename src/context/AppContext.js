@@ -1,23 +1,14 @@
 import { useState } from 'react';
 import { CounterContext } from './CounterContext';
+import { CounterProvider } from './CounterProvider';
 import { FullStackExample } from './FullStackExample';
 import { RegularExample } from './RegularExample';
 
 export const AppContext = () => {
     const [showFullStack, setShowFullStack] = useState(false);
 
-    const [numberOfClicks, setNumberOfClicks] = useState(0);
-
-    const increment = (amount) => {
-        setNumberOfClicks(numberOfClicks + amount);
-    }
-
-    const reset = () => {
-        setNumberOfClicks(0);
-    }
-
     return (
-        <CounterContext.Provider value={{ numberOfClicks, increment, reset }}>
+        <CounterProvider>
             <div className="page-container">
                 <button
                     disabled={!showFullStack}
@@ -29,6 +20,6 @@ export const AppContext = () => {
                 >Show Full-stack Example</button>
                 {showFullStack ? <FullStackExample /> : <RegularExample />}
             </div>
-        </CounterContext.Provider>
+        </CounterProvider>
     );
 }
