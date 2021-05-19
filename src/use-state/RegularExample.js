@@ -1,8 +1,27 @@
+import { useState } from 'react';
+
 export const RegularExample = () => {
+    const [numberOfClicks, setNumberOfClicks] = useState(0);
+    const [incrementBy, setIncrementBy] = useState(1);
+
     return (
         <div className="counter-container">
-            <div className="counter-text">You've clicked the button x times</div>
-            <button className="counter-button">Click here</button>
+            <label>
+                Increment by:
+                <input
+                    type="number"
+                    value={incrementBy}
+                    onChange={e => setIncrementBy(Number(e.target.value))} />
+            </label>
+            <div className="counter-text">You've clicked the button {numberOfClicks} times</div>
+            <button
+                onClick={() => setNumberOfClicks(numberOfClicks + incrementBy)}
+                className="counter-button"
+            >Click here</button>
+            <button
+                onClick={() => setNumberOfClicks(0)}
+                className="reset-button"
+            >Reset Count</button>
         </div>
     );
 }
