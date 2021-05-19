@@ -1,13 +1,21 @@
+import { useContext } from 'react';
+import { CounterContext } from './CounterContext';
+
 export const RegularExample = () => {
+    const { numberOfClicks, increment, reset, incrementBy, setIncrementBy } = useContext(CounterContext);
+
     return (
         <div className="counter-container">
             <label>
                 Increment by:
-                <input type="number" />
+                <input
+                    value={incrementBy}
+                    onChange={e => setIncrementBy(Number(e.target.value))}
+                    type="number" />
             </label>
-            <div className="counter-text">You've clicked the button x times</div>
-            <button className="counter-button">Click here</button>
-            <button className="reset-button">Reset Count</button>
+            <div className="counter-text">You've clicked the button {numberOfClicks} times</div>
+            <button onClick={increment} className="counter-button">Click here</button>
+            <button onClick={reset} className="reset-button">Reset Count</button>
         </div>
     );
 }
