@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { CounterContext } from './CounterContext';
 import { CounterProvider } from './CounterProvider';
-import { FullStackExample } from './FullStackExample';
-import { RegularExample } from './RegularExample';
+import { ContextExample } from './ContextExample';
+import { FullStackCounterProvider } from './FullStackCounterProvider';
 
 export const AppContext = () => {
     const [showFullStack, setShowFullStack] = useState(false);
+    
+    const ProviderComponent = showFullStack ? FullStackCounterProvider : CounterProvider;
 
     return (
-        <CounterProvider>
+        <ProviderComponent>
             <div className="page-container">
                 <button
                     disabled={!showFullStack}
@@ -18,8 +19,8 @@ export const AppContext = () => {
                     disabled={showFullStack}
                     onClick={() => setShowFullStack(true)}
                 >Show Full-stack Example</button>
-                {showFullStack ? <FullStackExample /> : <RegularExample />}
+                <ContextExample />
             </div>
-        </CounterProvider>
+        </ProviderComponent>
     );
 }

@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { CounterContext } from './CounterContext';
 
-export const RegularExample = () => {
+export const ContextExample = () => {
     const { numberOfClicks, increment, reset } = useContext(CounterContext);
     const [incrementBy, setIncrementBy] = useState(1);
 
