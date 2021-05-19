@@ -7,10 +7,9 @@ export const AppContext = () => {
     const [showFullStack, setShowFullStack] = useState(false);
 
     const [numberOfClicks, setNumberOfClicks] = useState(0);
-    const [incrementBy, setIncrementBy] = useState(1);
 
-    const increment = () => {
-        setNumberOfClicks(numberOfClicks + 1);
+    const increment = (amount) => {
+        setNumberOfClicks(numberOfClicks + amount);
     }
 
     const reset = () => {
@@ -18,7 +17,7 @@ export const AppContext = () => {
     }
 
     return (
-        <CounterContext.Provider value={{ numberOfClicks, increment, reset, incrementBy, setIncrementBy }}>
+        <CounterContext.Provider value={{ numberOfClicks, increment, reset }}>
             <div className="page-container">
                 <button
                     disabled={!showFullStack}
