@@ -5,6 +5,7 @@ export const FullStackExample = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [numberOfClicks, setNumberOfClicks] = useState(0);
     const [incrementBy, setIncrementBy] = useState(1);
+    const [isInitial, setIsInitial] = useState(true);
 
     useEffect(() => {
         const loadCount = async () => {
@@ -17,16 +18,24 @@ export const FullStackExample = () => {
         loadCount();
     }, []);
 
+    useEffect(() => {
+        const updateCount = async () => {
+            await axios.put('/count', { count: numberOfClicks });
+        }
+
+        if (!isInitial) {
+            updateCount();
+        }
+
+        setIsInitial(false);
+    }, [isInitial, numberOfClicks]);
+
     const increment = async () => {
-        const response = await axios.put('/count/increment', { amount: incrementBy });
-        const { count } = response.data;
-        setNumberOfClicks(count);
+        setNumberOfClicks(numberOfClicks + 1);
     }
 
     const reset = async () => {
-        const response = await axios.put('/count/reset');
-        const { count } = response.data;
-        setNumberOfClicks(count);
+        setNumberOfClicks(0);
     }
 
     return isLoading ? <p>Loading...</p> : (
