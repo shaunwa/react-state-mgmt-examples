@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { NavBar } from './NavBar';
+import { AppUseState } from './use-state/AppUseState';
+import { AppContext } from './context/AppContext';
+import { AppMobX } from './mobx/AppMobX';
+import { AppRecoil } from './recoil/AppRecoil';
+import { AppRedux } from './redux/AppRedux';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+export const App = () => (
+    <Router>
+        <NavBar />
+        <Switch>
+            <Route path="/use-state">
+                <AppUseState />
+            </Route>
+            <Route path="/context">
+                <AppContext />
+            </Route>
+            <Route path="/recoil">
+                <AppRecoil />
+            </Route>
+            <Route path="/redux">
+                <AppRedux />
+            </Route>
+            <Route path="/mobx">
+                <AppMobX />
+            </Route>
+        </Switch>
+    </Router>
+);
