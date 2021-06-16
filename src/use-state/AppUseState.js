@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import { FullStackExample } from './FullStackExample';
 import { RegularExample } from './RegularExample';
+import { useLocalStoragePersist } from './useLocalStoragePersist';
 
 export const AppUseState = () => {
-    const [showFullStack, setShowFullStack] = useState(false);
+    const [showFullStack, setShowFullStack] = useLocalStoragePersist('showFullStack', false);
 
     return (
         <div className="page-container">
